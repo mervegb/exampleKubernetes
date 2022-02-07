@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-example
+  labels:
+    app: node-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: node-example
+  template:
+    metadata:
+      labels:
+        run: node-example
+    spec:
+      containers:
+        - name: node-example
+          image: mervegb/node-kubernetes:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
